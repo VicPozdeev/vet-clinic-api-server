@@ -1,0 +1,55 @@
+database:
+  dialect: sqlite3
+  host:  sqlite.db
+  port:
+  dbname: 
+  username: 
+  password: 
+  migration: true
+
+redis:
+  enabled: false
+  connection_pool_size: 10
+  port: 6379
+
+extension:
+  master_generator: true
+  security_enabled: false
+  cors_enabled: true
+  csrf_enabled: false
+
+staticcontents:
+  enabled: false
+
+swagger:
+  enabled: true
+  path: /swagger/*
+
+logger:
+  gorm_config:
+    slow_threshold: 200ms
+    ignore_record_not_found_error: false
+    parameterized_queries: false
+  zap_config:
+    level: "info"
+    encoding: "console"
+    development: true
+    encoderConfig:
+      messageKey: "Msg"
+      levelKey: "Level"
+      timeKey: "Time"
+      nameKey: "Name"
+      callerKey: "Caller"
+      stacktraceKey: "St"
+      levelEncoder: "capital"
+      timeEncoder: "iso8601"
+      durationEncoder: "string"
+      callerEncoder: "short"
+    outputPaths:
+      - "stdout"
+    errorOutputPaths:
+      - "stdout"
+  log_rotate:
+    maxsize: 3
+    maxage: 7
+    maxbackups: 7

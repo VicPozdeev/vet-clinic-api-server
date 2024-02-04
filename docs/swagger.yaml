@@ -1,0 +1,1864 @@
+basePath: /v1
+definitions:
+  controllers.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  controllers.HealthResult:
+    properties:
+      status:
+        example: available
+        type: string
+    type: object
+  dto.ClientDto:
+    properties:
+      birthDate:
+        description: Date only
+        format: date
+        type: string
+      email:
+        description: E-mail string.
+        example: mail@mail.com
+        type: string
+      info:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        type: string
+      name:
+        description: Alphabetic characters only (Russian and English).
+        maxLength: 255
+        type: string
+      patronymic:
+        description: Alphabetic characters only (Russian and English).
+        maxLength: 255
+        type: string
+      phone:
+        description: E.164 phone number string.
+        example: "+79876543210"
+        type: string
+      sex:
+        description: Alphabetic characters only (Russian and English).
+        type: string
+      surname:
+        description: Alphabetic characters only (Russian and English).
+        maxLength: 255
+        type: string
+    type: object
+  dto.DepartmentDto:
+    properties:
+      name:
+        description: Alphabetic characters only (Russian and English).
+        maxLength: 255
+        type: string
+      services:
+        items:
+          type: integer
+        type: array
+    required:
+    - name
+    type: object
+  dto.LeadDto:
+    properties:
+      comment:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        type: string
+      doctorId:
+        type: integer
+      email:
+        description: E-mail string.
+        example: mail@mail.com
+        type: string
+      name:
+        description: Alphabetic characters only (Russian and English).
+        maxLength: 255
+        type: string
+      phone:
+        description: E.164 phone number string.
+        example: "+79876543210"
+        type: string
+      status:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        type: string
+      type:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        type: string
+    type: object
+  dto.LoginDto:
+    properties:
+      login:
+        description: Login using username, e-mail, or phone.
+        example: Login
+        type: string
+      password:
+        description: |-
+          Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special symbol.
+          It can consist of printable ASCII characters.
+        example: 8p6R*R{3
+        maxLength: 72
+        minLength: 8
+        type: string
+    required:
+    - login
+    - password
+    type: object
+  dto.PetDto:
+    properties:
+      breed:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        type: string
+      clientId:
+        type: integer
+      colour:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        type: string
+      name:
+        description: Alphabetic characters only (Russian and English).
+        maxLength: 255
+        type: string
+      sex:
+        description: Alphabetic characters only (Russian and English).
+        type: string
+      type:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        type: string
+    type: object
+  dto.RoleDto:
+    properties:
+      name:
+        description: Alphabetic characters only (Russian and English).
+        type: string
+    required:
+    - name
+    type: object
+  dto.ServiceDto:
+    properties:
+      categoryId:
+        type: integer
+      name:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        maxLength: 255
+        type: string
+      price:
+        format: float64
+        type: number
+    required:
+    - name
+    type: object
+  dto.UpdatePasswordDto:
+    description: The 'NewPassword' and 'OldPassword' should not match, while the 'ConfirmPassword'
+      is required for verification but must match the new password.
+    properties:
+      confirmPassword:
+        description: |-
+          Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special symbol.
+          It can consist of printable ASCII characters.
+        example: 6@5JG5hG
+        maxLength: 72
+        minLength: 8
+        type: string
+      newPassword:
+        description: |-
+          Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special symbol.
+          It can consist of printable ASCII characters.
+        example: 6@5JG5hG
+        maxLength: 72
+        minLength: 8
+        type: string
+      oldPassword:
+        description: |-
+          Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special symbol.
+          It can consist of printable ASCII characters.
+        example: 8p6R*R{3
+        maxLength: 72
+        minLength: 8
+        type: string
+    required:
+    - confirmPassword
+    - newPassword
+    - oldPassword
+    type: object
+  dto.UserCreateDto:
+    properties:
+      password:
+        description: |-
+          Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special symbol.
+          It can consist of printable ASCII characters.
+        example: 8p6R*R{3
+        maxLength: 72
+        minLength: 8
+        type: string
+      roleId:
+        type: integer
+      username:
+        description: |-
+          Username must start with an alphabetical character.
+          It can consist of ASCII alphanumeric characters and the following symbols: _.-
+        example: Username
+        type: string
+    required:
+    - password
+    - roleId
+    - username
+    type: object
+  dto.UserUpdateDto:
+    properties:
+      active:
+        type: boolean
+      birthDate:
+        description: Date only
+        format: date
+        type: string
+      departments:
+        items:
+          type: integer
+        type: array
+      email:
+        description: E-mail string.
+        example: mail@mail.com
+        type: string
+      info:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        type: string
+      name:
+        description: Alphabetic characters only (Russian and English).
+        maxLength: 255
+        type: string
+      patronymic:
+        description: Alphabetic characters only (Russian and English).
+        maxLength: 255
+        type: string
+      phone:
+        description: E.164 phone number string.
+        example: "+79876543210"
+        type: string
+      profession:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        type: string
+      roleId:
+        type: integer
+      services:
+        items:
+          type: integer
+        type: array
+      sex:
+        description: Alphabetic characters only (Russian and English).
+        type: string
+      surname:
+        description: Alphabetic characters only (Russian and English).
+        maxLength: 255
+        type: string
+    type: object
+  dto.VisitDto:
+    properties:
+      clientId:
+        type: integer
+      dateTime:
+        description: Date and time.
+        format: date-time
+        type: string
+      doctorId:
+        type: integer
+      info:
+        description: 'Allowed characters: printable ASCII (Russian and English).'
+        type: string
+      petId:
+        type: integer
+      serviceId:
+        type: integer
+    type: object
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  models.Category:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  models.Client:
+    properties:
+      birthDate:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        $ref: '#/definitions/gorm.DeletedAt'
+      email:
+        type: string
+      id:
+        type: integer
+      info:
+        type: string
+      name:
+        type: string
+      patronymic:
+        type: string
+      phone:
+        type: string
+      sex:
+        type: string
+      surname:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Department:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      name:
+        type: string
+      services:
+        items:
+          $ref: '#/definitions/models.Service'
+        type: array
+      slug:
+        type: string
+      updated_at:
+        type: string
+      users:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+    type: object
+  models.Lead:
+    properties:
+      comment:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        $ref: '#/definitions/gorm.DeletedAt'
+      doctor:
+        $ref: '#/definitions/models.User'
+      doctorId:
+        type: integer
+      email:
+        type: string
+      id:
+        type: integer
+      lastUpdatedBy:
+        $ref: '#/definitions/models.User'
+      lastUpdatedById:
+        type: integer
+      name:
+        type: string
+      phone:
+        type: string
+      status:
+        description: open, in_progress, closed, rejected
+        type: string
+      type:
+        description: in clinic, online, callback
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Pet:
+    properties:
+      breed:
+        type: string
+      client:
+        $ref: '#/definitions/models.Client'
+      clientId:
+        type: integer
+      colour:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      name:
+        type: string
+      sex:
+        type: string
+      type:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Role:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  models.Service:
+    properties:
+      category:
+        $ref: '#/definitions/models.Category'
+      categoryId:
+        type: integer
+      created_at:
+        type: string
+      deleted_at:
+        $ref: '#/definitions/gorm.DeletedAt'
+      departments:
+        items:
+          $ref: '#/definitions/models.Department'
+        type: array
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: number
+      updated_at:
+        type: string
+      users:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+    type: object
+  models.User:
+    properties:
+      active:
+        type: boolean
+      birthDate:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        $ref: '#/definitions/gorm.DeletedAt'
+      departments:
+        items:
+          $ref: '#/definitions/models.Department'
+        type: array
+      email:
+        type: string
+      id:
+        type: integer
+      info:
+        type: string
+      name:
+        type: string
+      patronymic:
+        type: string
+      phone:
+        type: string
+      profession:
+        type: string
+      role:
+        $ref: '#/definitions/models.Role'
+      roleId:
+        type: integer
+      services:
+        items:
+          $ref: '#/definitions/models.Service'
+        type: array
+      sex:
+        type: string
+      slug:
+        type: string
+      surname:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  models.Visit:
+    properties:
+      client:
+        $ref: '#/definitions/models.Client'
+      clientId:
+        type: integer
+      created_at:
+        type: string
+      dateTime:
+        type: string
+      deleted_at:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      info:
+        type: string
+      lastUpdatedBy:
+        $ref: '#/definitions/models.User'
+      lastUpdatedById:
+        type: integer
+      pet:
+        $ref: '#/definitions/models.Pet'
+      petId:
+        type: integer
+      serviceId:
+        type: integer
+      services:
+        $ref: '#/definitions/models.Service'
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      userId:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: vic.pozdeev@gmail.com
+    name: Victor Pozdeev
+  description: This is API specification for vet-clinic API server.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/mit-license.php
+  title: Vet clinic API
+  version: v0.1.0
+paths:
+  /clients:
+    get:
+      consumes:
+      - application/json
+      description: Returns the list of clients.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            items:
+              $ref: '#/definitions/models.Client'
+            type: array
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a client list.
+      tags:
+      - Clients
+    post:
+      consumes:
+      - application/json
+      description: Create a new client.
+      parameters:
+      - description: A new client data for creating.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClientDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Client'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Create a new client. Required user''s role: Admin'
+      tags:
+      - Clients
+  /clients/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the existing client.
+      parameters:
+      - description: Client ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Client'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Delete the existing client. Required user''s role: Superuser'
+      tags:
+      - Clients
+    get:
+      consumes:
+      - application/json
+      description: Returns one record matched client's id.
+      parameters:
+      - description: Client ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Client'
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a client.
+      tags:
+      - Clients
+    put:
+      consumes:
+      - application/json
+      description: Update the existing client.
+      parameters:
+      - description: Client ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Client data for update.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ClientDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Client'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Update the existing client. Required user''s role: Admin'
+      tags:
+      - Clients
+  /departments:
+    get:
+      consumes:
+      - application/json
+      description: Returns the list of departments.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            items:
+              $ref: '#/definitions/models.Department'
+            type: array
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a department list.
+      tags:
+      - Departments
+    post:
+      consumes:
+      - application/json
+      description: Create a new department.
+      parameters:
+      - description: A new department data for creating.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DepartmentDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Department'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Create a new department. Required user''s role: Owner'
+      tags:
+      - Departments
+  /departments/{id_or_slug}:
+    get:
+      consumes:
+      - application/json
+      description: Returns one record matched department's id.
+      parameters:
+      - description: Department ID
+        in: path
+        name: id_or_slug
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Department'
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a department.
+      tags:
+      - Departments
+  /departments/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the existing department.
+      parameters:
+      - description: Department ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Department'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Delete the existing department. Required user''s role: Owner'
+      tags:
+      - Departments
+    put:
+      consumes:
+      - application/json
+      description: Update the existing department.
+      parameters:
+      - description: Department ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Department data for update.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DepartmentDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Department'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Update the existing department. Required user''s role: Owner'
+      tags:
+      - Departments
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: Returns the health status of the system.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch health status.
+          schema:
+            $ref: '#/definitions/controllers.HealthResult'
+      summary: Get the health status.
+      tags:
+      - System
+  /leads:
+    get:
+      consumes:
+      - application/json
+      description: Returns the list of leads.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            items:
+              $ref: '#/definitions/models.Lead'
+            type: array
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a lead list.
+      tags:
+      - Leads
+    post:
+      consumes:
+      - application/json
+      description: Create a new lead.
+      parameters:
+      - description: A new lead data for creating.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LeadDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Lead'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+      summary: Create a new lead.
+      tags:
+      - Leads
+  /leads/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the existing lead.
+      parameters:
+      - description: Lead ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Lead'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Delete the existing lead. Required user''s role: Superuser'
+      tags:
+      - Leads
+    get:
+      consumes:
+      - application/json
+      description: Returns one record matched lead's id.
+      parameters:
+      - description: Lead ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Lead'
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a lead.
+      tags:
+      - Leads
+    put:
+      consumes:
+      - application/json
+      description: Update the existing lead.
+      parameters:
+      - description: Lead ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Lead data for update.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LeadDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Lead'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Update the existing lead.
+      tags:
+      - Leads
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Login using username, e-mail, or phone along with the password.
+      parameters:
+      - description: Login and Password for logged-in.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to the authentication.
+          headers:
+            Cookie:
+              description: Authorization
+              type: string
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      summary: Login with credentials.
+      tags:
+      - Users
+  /logout:
+    post:
+      consumes:
+      - application/json
+      description: Logout the user by invalidating the current session.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully logged out.
+        "401":
+          description: Failed to the authentication.
+      summary: Logout user.
+      tags:
+      - Users
+  /pets:
+    get:
+      consumes:
+      - application/json
+      description: Returns the list of pets.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            items:
+              $ref: '#/definitions/models.Pet'
+            type: array
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a pet list.
+      tags:
+      - Pets
+    post:
+      consumes:
+      - application/json
+      description: Create a new pet.
+      parameters:
+      - description: A new pet data for creating.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PetDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Pet'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Create a new pet.
+      tags:
+      - Pets
+  /pets/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the existing pet.
+      parameters:
+      - description: Pet ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Pet'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Delete the existing pet. Required user''s role: Superuser'
+      tags:
+      - Pets
+    get:
+      consumes:
+      - application/json
+      description: Returns one record matched pet's id.
+      parameters:
+      - description: Pet ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Pet'
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a pet.
+      tags:
+      - Pets
+    put:
+      consumes:
+      - application/json
+      description: Update the existing pet.
+      parameters:
+      - description: Pet ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Pet data for update.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PetDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Pet'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Update the existing pet.
+      tags:
+      - Pets
+  /profile:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves and returns the user's own profile based on the session.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.User'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get user's profile.
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Updates and returns the user's own profile based on the session.
+      parameters:
+      - description: User data for update.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Update user's profile.
+      tags:
+      - Users
+  /profile/password:
+    put:
+      consumes:
+      - application/json
+      description: Updates the user's password based on the provided data.
+      parameters:
+      - description: Old password and new password for update.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdatePasswordDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Update user's password.
+      tags:
+      - Users
+  /roles:
+    get:
+      consumes:
+      - application/json
+      description: Returns the list of roles.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            items:
+              $ref: '#/definitions/models.Role'
+            type: array
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Get a role list. Required user''s role: Owner'
+      tags:
+      - Roles
+    post:
+      consumes:
+      - application/json
+      description: Create a new role.
+      parameters:
+      - description: A new role data for creating.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RoleDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Role'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Create a new role. Required user''s role: Superuser'
+      tags:
+      - Roles
+  /roles/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the existing role.
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Role'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Delete the existing role. Required user''s role: Superuser'
+      tags:
+      - Roles
+    get:
+      consumes:
+      - application/json
+      description: Returns one record matched role's id.
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Role'
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Get a role. Required user''s role: Owner'
+      tags:
+      - Roles
+    put:
+      consumes:
+      - application/json
+      description: Update the existing role.
+      parameters:
+      - description: Role ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Role data for update.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RoleDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Role'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Update the existing role. Required user''s role: Superuser'
+      tags:
+      - Roles
+  /services:
+    get:
+      consumes:
+      - application/json
+      description: Returns the list of services.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            items:
+              $ref: '#/definitions/models.Service'
+            type: array
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a service list.
+      tags:
+      - Services
+    post:
+      consumes:
+      - application/json
+      description: Create a new service.
+      parameters:
+      - description: A new service data for creating.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ServiceDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Service'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Create a new service. Required user''s role: Owner'
+      tags:
+      - Services
+  /services/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the existing service.
+      parameters:
+      - description: Service ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Service'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Delete the existing service. Required user''s role: Owner'
+      tags:
+      - Services
+    get:
+      consumes:
+      - application/json
+      description: Returns one record matched service's id.
+      parameters:
+      - description: Service ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Service'
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a service.
+      tags:
+      - Services
+    put:
+      consumes:
+      - application/json
+      description: Update the existing service.
+      parameters:
+      - description: Service ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Service data for update.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ServiceDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Service'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Update the existing service. Required user''s role: Owner'
+      tags:
+      - Services
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Returns the list of users.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a user list.
+      tags:
+      - Users
+    post:
+      consumes:
+      - application/json
+      description: Create a new user.
+      parameters:
+      - description: A new user data for creating.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserCreateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Create a new user. Required user''s role: Owner'
+      tags:
+      - Users
+  /users/{id_or_slug}:
+    get:
+      consumes:
+      - application/json
+      description: Returns one record matched user's id or slug.
+      parameters:
+      - description: User ID
+        in: path
+        name: id_or_slug
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a user.
+      tags:
+      - Users
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the existing user.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Delete the existing user. Required user''s role: Superuser'
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Update the existing user.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User data for update.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserUpdateDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Update the existing user. Required user''s role: Owner'
+      tags:
+      - Users
+  /visits:
+    get:
+      consumes:
+      - application/json
+      description: Returns the list of visits.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            items:
+              $ref: '#/definitions/models.Visit'
+            type: array
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a visit list.
+      tags:
+      - Visits
+    post:
+      consumes:
+      - application/json
+      description: Create a new visit.
+      parameters:
+      - description: A new visit data for creating.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.VisitDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Visit'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Create a new visit. Required user''s role: Admin'
+      tags:
+      - Visits
+  /visits/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the existing visit.
+      parameters:
+      - description: Visit ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Visit'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Delete the existing visit. Required user''s role: Superuser'
+      tags:
+      - Visits
+    get:
+      consumes:
+      - application/json
+      description: Returns one record matched visit's id.
+      parameters:
+      - description: Visit ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Visit'
+        "400":
+          description: Failed to fetch data.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+      security:
+      - ApiKeyAuth: []
+      summary: Get a visit.
+      tags:
+      - Visits
+    put:
+      consumes:
+      - application/json
+      description: Update the existing visit.
+      parameters:
+      - description: Visit ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Visit data for update.
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.VisitDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success to fetch data.
+          schema:
+            $ref: '#/definitions/models.Visit'
+        "400":
+          description: Failed to the registration.
+          schema:
+            $ref: '#/definitions/controllers.ErrorResponse'
+        "401":
+          description: Failed to the authentication.
+        "403":
+          description: Access denied.
+      security:
+      - ApiKeyAuth: []
+      summary: 'Update the existing visit. Required user''s role: Admin'
+      tags:
+      - Visits
+schemes:
+- http
+swagger: "2.0"

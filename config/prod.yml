@@ -1,0 +1,57 @@
+database:
+  dialect: postgres
+  host: postgres-db
+  port: 5432
+  dbname: postgres
+  username: postgres
+  password: postgres
+  migration: false
+
+redis:
+  enabled: false
+  connection_pool_size: 10
+  port: 6379
+
+extension:
+  master_generator: false
+  security_enabled: false
+  cors_enabled: false
+  csrf_enabled: false
+
+staticcontents:
+  enabled: false
+
+swagger:
+  enabled: true
+  path: /swagger/*
+
+logger:
+  gorm_config:
+    slow_threshold: 200ms
+    ignore_record_not_found_error: false
+    parameterized_queries: false
+  zap_config:
+    level: "info"
+    encoding: "console"
+    development: true
+    encoderConfig:
+      messageKey: "Msg"
+      levelKey: "Level"
+      timeKey: "Time"
+      nameKey: "Name"
+      callerKey: "Caller"
+      stacktraceKey: "St"
+      levelEncoder: "capital"
+      timeEncoder: "iso8601"
+      durationEncoder: "string"
+      callerEncoder: "short"
+    outputPaths:
+      - "stdout"
+      - "./application.log"
+    errorOutputPaths:
+      - "stderr"
+      - "./error.log"
+  log_rotate:
+    maxsize: 3
+    maxage: 7
+    maxbackups: 7
